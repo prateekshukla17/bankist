@@ -89,7 +89,34 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} EUR`;
+
+  const expense = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(expense)} EUR`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => deposit * 0.012)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest} EUR`;
+};
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -102,6 +129,39 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 console.log(accounts);
+
+//Event Handlers
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault(); //prevents the form from submitting
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    //clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    //dislay movements
+    displayMovements(currentAccount.movements);
+    //display balance
+    calcDisplayBalance(currentAccount.movements);
+    //display summary
+    calcDisplaySummary(currentAccount.movements);
+  } else {
+    containerApp.style.opacity = 0;
+    alert('Invalid username or password');
+  }
+});
+
+//
 
 // const euroToUsd = 1.1;
 // const movementsUSD = movements.map(function (mov) {
@@ -157,3 +217,61 @@ console.log(accounts);
 // let arr3 = arr.join('-');
 
 // console.log(arr2.at(1));
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const withdrawals = movements.filter(mov => mov < 0);
+
+console.log(deposits);
+console.log(withdrawals);
+
+//accumulator -> snowball
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+const balance2 = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance2);
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+
+console.log(max);
+
+const calcAverageHumanAge = function (ages) {
+  const humanAge = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanAge.filter(age => age >= 18);
+
+  console.log(humanAge);
+  console.log(adults);
+  const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+  return average;
+};
+
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+const euroToUsd = 1.1;
+
+//PIPELINE
+const totalDepositsinUsd = movements
+  .filter(mov => mov > 0) //returns an array of deposits
+  .map(mov => mov * euroToUsd) //returns an array of deposits in USD
+  .reduce((acc, mov) => acc + mov, 0); //returns the total of deposits in USD
+
+console.log(totalDepositsinUsd);
+
+const firstWidrawl = movements.find(mov => mov < 0); //returns the first element that satisfies the condition
+//find method on objects
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis'); //returns the first element that satisfies the condition
+
+// accounts.forEach(function (acc) {
+//   if (acc.owner === 'Jessica Davis') console.log(acc);
+// });

@@ -278,7 +278,6 @@ const firstWidrawl = movements.find(mov => mov < 0); //returns the first element
 //find method on objects
 
 console.log(accounts);
-
 const account = accounts.find(acc => acc.owner === 'Jessica Davis'); //returns the first element that satisfies the condition
 
 // accounts.forEach(function (acc) {

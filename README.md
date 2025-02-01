@@ -24,10 +24,6 @@ Bankist is a simple banking application that allows users to manage their accoun
 - **Loan Requests**: Apply for loans based on account balance and activity.
 - **Account Closure**: Option to close the account when no longer needed.
 
-## Demo
-
-Experience the live demo of Bankist [here](https://bankist-dom.netlify.app/).
-
 ## Installation
 
 To run this project locally:

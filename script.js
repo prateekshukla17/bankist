@@ -81,9 +81,12 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -193,6 +196,20 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    //Add movement
+    currentAccount.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
@@ -209,6 +226,13 @@ btnClose.addEventListener('click', function (e) {
     //Hide UI
     containerApp.style.opacity = 0;
   }
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 //
@@ -308,7 +332,7 @@ calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const euroToUsd = 1.1;
 
 //PIPELINE
-const totalDepositsinUsd = movements
+const totalDepositsinUsd = deposits
   .filter(mov => mov > 0) //returns an array of deposits
   .map(mov => mov * euroToUsd) //returns an array of deposits in USD
   .reduce((acc, mov) => acc + mov, 0); //returns the total of deposits in USD
@@ -330,3 +354,39 @@ console.log(movements);
 const lastWidrawl = movements.findLast(mov => mov < 0);
 
 console.log(lastWidrawl);
+
+const anydeposits = movements.some(mov => mov > 5000); //returns true if any of the elements satisfy the condition
+
+const arr1 = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr1.flat()); //flattens the array by one level
+
+const arr2 = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arr2.flat());
+
+// const accoutmovements = accounts.map(acc => acc.movements);
+
+// const allMovements = accoutmovements.flat();
+// console.log(allMovements);
+
+// const allbalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(allbalance);
+
+const overallBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(overallBalance);
+
+//flat map
+
+const overallBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+const arr3 = [124, 56, 1334, 700, 34, 93];
+
+//return < 0, A, B (keep order)
+//return > 0, B, A (switch order)
+console.log(arr3.sort((a, b) => a - b));
+console.log(arr3);

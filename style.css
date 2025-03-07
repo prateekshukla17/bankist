@@ -17,8 +17,8 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: #444;
-  background-color: #f3f3f3;
+  color: #333;
+  background-color: #f0f4f8;
   height: 100vh;
   padding: 2rem;
 }
@@ -28,11 +28,14 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
+  background-color: #007bff;
+  border-radius: 10px;
 }
 
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
+  color: #fff;
 }
 
 .logo {
@@ -52,14 +55,15 @@ nav {
   width: 12rem;
   border-radius: 10rem;
   margin-right: 1rem;
-  color: inherit;
-  border: 1px solid #fff;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
   transition: all 0.3s;
 }
 
 .login__input:focus {
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #007bff;
 }
 
 .login__input::placeholder {
@@ -70,7 +74,7 @@ nav {
   border: none;
   background: none;
   font-size: 2.2rem;
-  color: inherit;
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -80,7 +84,7 @@ nav {
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
-  color: #777;
+  color: #0056b3;
 }
 
 /* MAIN */
@@ -110,16 +114,18 @@ nav {
   font-size: 2.2rem;
   font-weight: 500;
   margin-bottom: -0.2rem;
+  color: #007bff;
 }
 
 .balance__date {
   font-size: 1.4rem;
-  color: #888;
+  color: #666;
 }
 
 .balance__value {
   font-size: 4.5rem;
   font-weight: 400;
+  color: #333;
 }
 
 /* MOVEMENTS */
@@ -155,16 +161,17 @@ nav {
 }
 
 .movements__type--deposit {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(to top left, #007bff, #0056b3);
 }
 
 .movements__type--withdrawal {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(to top left, #ff4b5c, #ff6b6b);
 }
 
 .movements__value {
   font-size: 1.7rem;
   margin-left: auto;
+  color: #333;
 }
 
 /* SUMMARY */
@@ -181,20 +188,22 @@ nav {
   font-weight: 500;
   text-transform: uppercase;
   margin-right: 0.8rem;
+  color: #666;
 }
 
 .summary__value {
   font-size: 2.2rem;
   margin-right: 2.5rem;
+  color: #333;
 }
 
 .summary__value--in,
 .summary__value--interest {
-  color: #66c873;
+  color: #007bff;
 }
 
 .summary__value--out {
-  color: #f5465d;
+  color: #ff4b5c;
 }
 
 .btn--sort {
@@ -204,6 +213,7 @@ nav {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
+  color: #007bff;
 }
 
 /* OPERATIONS */
@@ -218,18 +228,18 @@ nav {
 }
 
 .operation--loan {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-image: linear-gradient(to top left, #007bff, #0056b3);
 }
 
 .operation--close {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-image: linear-gradient(to top left, #ff4b5c, #ff6b6b);
 }
 
 h2 {
   margin-bottom: 1.5rem;
   font-size: 1.7rem;
   font-weight: 600;
-  color: #333;
+  color: #007bff;
 }
 
 .form {
@@ -251,7 +261,7 @@ h2 {
 .form__input {
   width: 100%;
   border: none;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 123, 255, 0.1);
   font-family: inherit;
   font-size: 1.5rem;
   text-align: center;
@@ -263,26 +273,28 @@ h2 {
 
 .form__input:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 123, 255, 0.2);
 }
 
 .form__label {
   font-size: 1.3rem;
   text-align: center;
+  color: #666;
 }
 
 .form__btn {
   border: none;
   border-radius: 0.7rem;
   font-size: 1.8rem;
-  background-color: #fff;
+  background-color: #007bff;
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .form__btn:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #0056b3;
 }
 
 .logout-timer {
@@ -290,8 +302,10 @@ h2 {
   margin-top: 1.9rem;
   text-align: right;
   font-size: 1.25rem;
+  color: #666;
 }
 
 .timer {
   font-weight: 600;
+  color: #333;
 }

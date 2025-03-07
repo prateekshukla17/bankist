@@ -390,3 +390,30 @@ const arr3 = [124, 56, 1334, 700, 34, 93];
 //return > 0, B, A (switch order)
 console.log(arr3.sort((a, b) => a - b));
 console.log(arr3);
+
+const groupedmovements = Object.groupBy(movements, mov =>
+  mov > 0 ? 'deposit' : 'withdrawal'
+);
+
+console.log(groupedmovements);
+
+const groupedByActivity = Object.groupBy(accounts, acc => {
+  const movementCount = acc.movements.length;
+  if (movementCount >= 8) return 'very active';
+  if (movementCount >= 5) return 'active';
+  if (movementCount >= 2) return 'somewhat active';
+  if (movementCount >= 1) return 'inactive';
+});
+
+console.log(groupedByActivity);
+
+// Creating an Array of a Node List (Useful for converting a NodeList to an Array)
+
+const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+
+labelBalance.addEventListener('click', function (e) {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value')
+  );
+  console.log(movementsUI.map(el => Number(el.textContent)));
+});
